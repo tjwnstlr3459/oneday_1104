@@ -16,8 +16,8 @@ public class MemberView {
 	}
 
 	public int showMenu() {
-		System.out.println("====회원 관리프로그램v1====");
-		System.out.println("1.회원 전체조회");		//select
+		System.out.println("====회원 관리프로그램v2====");
+		System.out.println("1.회원 전체 조회");		//select
 		System.out.println("2.아이디로 회원 조회");	//select
 		System.out.println("3.이름으로 회원 조회");	//select
 		System.out.println("4.회원가입");			//insert
@@ -74,11 +74,11 @@ public class MemberView {
 		}		
 	}
 
-	public Member getMember(String memberId) {
+	public Member getMember() {
 		
 		Member m = new Member();
 		
-		m.setMemberId(memberId);//1번째방법.controller에서 받은 아이디를 그대로 보낸다
+		//m.setMemberId(memberId);//1번째방법.controller에서 받은 아이디를 그대로 보낸다
 								//2번째방법.은 momberId를 안받고 controller에서 적용하는것
 		System.out.print("비밀번호 입력 : ");
 		String memberPw = sc.next();
