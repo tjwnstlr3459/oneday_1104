@@ -11,6 +11,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class MemberDao {
+	
+	
 	public ArrayList<Member> getAllMember() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
