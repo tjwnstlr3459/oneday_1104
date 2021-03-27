@@ -27,17 +27,16 @@ public class Controller {
 
 	public void main() {
 
-		while (true) {
+		while (true) {			
 			switch (view.mainMenu()) {
 			case 1: // 로그인하기
 				Member m = view.login();
-
 				Connection conn = JDBCTemplate.getConnection();
 				int result = dao.loginMember(conn, m);
 				if (result > 0) {
 					view.printMsg("로그인 성공!");
 					loginMember = m;
-					loginMenu(m);
+					loginMenu(loginMember);
 				} else {
 					view.printMsg("아이디 또는 비밀번호를 확인하세요");
 					break;
@@ -46,7 +45,7 @@ public class Controller {
 				break;
 
 			case 2: // 회원가입
-				insertMember();
+				insertMember(loginMember);
 				break;
 			case 3: // 아이디찾기
 				selectId();
@@ -63,7 +62,7 @@ public class Controller {
 		while (true) {
 			switch (view.loginMenu()) {
 			case 1: // 게시물 목록보기
-				printAllPost(m);
+				printAllPost();
 				break;
 			case 2: // 게시물 상세 보기
 				printPost();
@@ -72,31 +71,37 @@ public class Controller {
 				insertPost();
 				break;
 			case 4: // 게시물 수정			
-				modifyPost(m);
+				modifyPost();
 				break;
 			case 5: // 게시물 삭제
+				deletePost();
 				break;
 			case 6: // 내정보 보기
+				myInformation();
 				break;
 			case 7: // 내정보 변경
+				modifyInformation();
 				break;
 			case 8: // 회원탈퇴
-				break;
+				outMember();
+				return;
 			case 0: // 로그아웃
+				logOut();
 				view.printMsg("로그아웃~");
-				break;
+				return;
 			}
 		}
 
 	}
 
-
-	private void insertMember() { // 회원가입
-		Member m = view.insertMember();
+	private void insertMember(Member loginMember) { // 회원가입
+		
+		Member insert = view.insertMember();		
 		Connection conn = JDBCTemplate.getConnection();
-		int result = dao.insertMember(conn, m);
+		int result = dao.insertMember(conn, insert);
 
 		if (result > 0) {
+			loginMember = insert;
 			view.printMsg("가입성공!");
 			JDBCTemplate.commit(conn);
 		} else {
@@ -124,20 +129,22 @@ public class Controller {
 	////////////////////////////////////////////////////////////////////
 	// 로그인 메뉴
 
-	private void printAllPost(Member m) { // 게시글 전체 출력
+	private void printAllPost() { // 게시글 전체 출력
 		view.printMsg("====게시물 목록====");
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Board> list = dao.boardAllPrint(conn,m);
+		ArrayList<Board> list = dao.boardAllPrint(conn);
 		if (list.isEmpty()) {
 			view.printMsg("게시물이 없습니다.");
 		} else {
 			
 			view.PrintAllPost(list);
 		}
+		JDBCTemplate.close(conn);
 	}
 
 	private void insertPost() { // 게시물 등록
 		Board b = view.insertPosted();
+		b.setBoardWriter(loginMember.getMemberId());
 
 		Connection conn = JDBCTemplate.getConnection();
 		int result = dao.insertBoard(b, conn);
@@ -151,56 +158,122 @@ public class Controller {
 		}
 		JDBCTemplate.close(conn);
 	}
-	private void printPost() {
+	private void printPost() {	//게시물 상세보기
 		int no = view.getNo();
 		
 		Connection conn = JDBCTemplate.getConnection();
-		Board b = dao.selectBoard(conn,no);
+		int result = dao.readCount(conn,no);
 		
-		if(b==null) {
+		if(result>0) {
+			Board b = dao.selectBoard(conn,no);
+			view.PrintPost(b);			
+		}else{
 			view.printMsg("번호가 잘못되었습니다.");
-		}else {
-			view.PrintPost(b);
-		}	
+		}
 		JDBCTemplate.close(conn);
 	}
-	private void modifyPost(Member m) {
+	private void modifyPost() {	//게시물 수정
 		int no = view.getNo();
 		Connection conn = JDBCTemplate.getConnection();
-		int result = dao.modifyLoginBoard(conn,no,m);
+		int result = dao.modifyLoginBoard(conn,no,loginMember);
 		
 		if(result==0) {
 			view.printMsg("작성자만 수정이 가능합니다.");
 		}else {
 			Board b = view.modifyPost();
-			result = dao.modifyPost(b,conn,m);
-			view.printMsg("게시글 수정 완료");
+			result = dao.modifyPost(b,conn,no);
+			if(result>0) {
+				view.printMsg("게시글 수정 완료");
+				JDBCTemplate.commit(conn);
+			}else {
+				view.printMsg("게시글 수정 실패");
+				JDBCTemplate.rollback(conn);
+			}			
 		}
 		JDBCTemplate.close(conn);	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+	private void deletePost() {	//게시물 삭제
+		int no = view.getNo();
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.modifyLoginBoard(conn,no,loginMember);
+		
+		if(result==0) {
+			view.printMsg("작성자만 삭제가 가능합니다.");
+		}else {
+			result = dao.deletePost(conn,no);
+			if(result>0) {
+				view.printMsg("게시글 삭제 완료");
+				JDBCTemplate.commit(conn);
+			}else {
+				view.printMsg("게시글 삭제 실패");
+				JDBCTemplate.rollback(conn);
+			}			
+		}
+		JDBCTemplate.close(conn);	
+		
+	}
+	private void myInformation() {	//내정보보기
+		Connection conn = JDBCTemplate.getConnection();
+		Member m =dao.myInformation(conn,loginMember);
+		view.myInformation(m);
+		JDBCTemplate.close(conn);	
+	}
+
+	private void modifyInformation() {
+		Member m = view.modifyInformation();
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.modifyInformation(conn,m,loginMember);
+		if(result>0) {
+			view.printMsg("수정완료");
+			JDBCTemplate.commit(conn);
+		}else {
+			view.printMsg("수정실패");
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+
+	}
+	private void logOut() {
+		loginMember = null;
+	}
+
+
+	private void outMember() {
+		int sel = view.choiceOut();
+		if(sel==1) {
+			Connection conn = JDBCTemplate.getConnection();
+			int result = dao.deleteMember(conn,loginMember);
+			if(result>0) {
+				dao.nullBoard(conn);
+				
+				JDBCTemplate.commit(conn);
+				loginMember = null;
+				view.printMsg("탈퇴성공");
+			}else {				
+				JDBCTemplate.rollback(conn);
+				view.printMsg("탈퇴실패");
+			}
+			JDBCTemplate.close(conn);
+		}else if(sel==2) {
+			view.printMsg("취소되었습니다.");
+		}else {
+			view.printMsg("잘못입력하셨습니다");
+		}
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
