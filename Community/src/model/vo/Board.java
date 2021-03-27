@@ -42,7 +42,7 @@ public class Board {
 		this.boardContent = boardContent;
 	}
 	public String getBoardWriter() {
-		return boardWriter;
+		return (boardWriter!=null?boardWriter:"탈퇴회원");
 	}
 	public void setBoardWriter(String boardWriter) {
 		this.boardWriter = boardWriter;
