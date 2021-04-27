@@ -104,7 +104,8 @@ public class View {
 		b.setBoardTitle(title);
 
 		System.out.print("내용 입력 : ");
-		String content = sc.next();
+		sc.nextLine();
+		String content = sc.nextLine();
 		b.setBoardContent(content);
 		return b;
 	}

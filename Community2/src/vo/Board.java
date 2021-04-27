@@ -60,5 +60,9 @@ public class Board {
 		this.wDate = wDate;
 	}
 	
+	public String toString() {
+		return  getBoardNo()+"\t"+getBoardTitle()+"\t"+getWriter()+"\t"
+	+getCount()+"\t"+getwDate();
+	}
 	
 }

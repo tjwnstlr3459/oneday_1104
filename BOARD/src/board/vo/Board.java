@@ -65,8 +65,13 @@ public class Board {
 	}
 
 	@Override
+
+	public String toString() {
+		return getBoardNo()+"\t"+getBoardTitle()+"\t"+getBoardWriter()+"\t"+getBoardContent()+"\t"+getEnDate();
+	}
+	/*@Override
 	public String toString() {
 		return getBoardTitle()+getBoardContent()+getBoardWriter();
-	}
+	}*/
 	
 }

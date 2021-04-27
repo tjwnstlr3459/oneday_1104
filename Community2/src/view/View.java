@@ -112,17 +112,17 @@ public class View {
 		System.out.println("====게시물 목록====");
 		System.out.println("번호\t제목\t이름\t조회수\t날짜");
 		
-		for (int i = 0; i < list.size(); i++) {
+		/*for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).getBoardNo()+"\t"+
 								list.get(i).getBoardTitle()+"\t"+
 								list.get(i).getWriter()+"\t"+
 								list.get(i).getCount()+"\t"+
 								list.get(i).getwDate());
 	
-		}
-		/*for (Board b : list) {
-			System.out.println(b);
 		}*/
+		for (Board b : list) {
+			System.out.println(b);
+		}
 	}
 
 	public int getNo() {

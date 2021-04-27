@@ -306,23 +306,7 @@ public class Dao {
 		return result;
 	}
 
-	public void nullBoard(Connection conn) {
-		PreparedStatement pstmt = null;
-		
-		String query = "update board_2 set board_wirter = ? where board_writer = ?";
-		String out = "탈퇴회원";
-		String ddd = (null);
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, out);	
-			pstmt.setString(2, ddd);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(pstmt);
-		}		
-	}
+	
 
 	public int readCount(Connection conn, int no) {
 		PreparedStatement pstmt = null;

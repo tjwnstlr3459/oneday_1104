@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>[서준식]메인페이지</h1>
+	<a href="/requestServer">1. 서버 호출하기</a><br>
+	<a href="/sendData1?name=서준식">2. 서버로 데이터 보내기(a태그)</a>
+	<form action ="/sendData2" method="get">
+		보낼 문자 : <input type="text" name="str"><br>
+		보낼 숫자 : <input type="text" name="num"><br>
+		라디오 :
+		<input type="radio" name="gender" value="남">남자
+		<input type="radio" name="gender" value="여">여자
+		<br>
+		체크박스 :
+		<input type ="checkbox" name ="hobby" value="camera">카메라
+		<input type ="checkbox" name ="hobby" value="soccer">축구
+		<input type ="checkbox" name ="hobby" value="java">자바
+		<br>
+		셀렉트 박스 : 
+		<select name="age">
+			<option value="20">20대</option>
+			<option value="30">30대</option>
+			<option value="40">40대</option>
+			<option value="50">50대</option>
+		</select>
+		<br>
+		<input type="submit" value="서버로 전송">
+	</form>
+	<input type="text" name = "testStr">
+	<hr>
+	<form action="/plus" method="get">
+		<input type="text" name="num1">
+		+
+		<input type ="text" name="num2">
+		<input type="submit" value="더하기">
+	</form>
+	<hr>
+	<h2>숙제</h2>
+	<hr>
+	<form action="/calc" method="get">
+		<input type="text" name="num1">
+		<select name="oper">
+			<option value="+">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+		</select>
+		<input type="text" name="num2">
+		<input type="submit" value="계산하기">
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
