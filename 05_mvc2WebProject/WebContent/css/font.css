@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "NotoSansKR";
+  src: local("NotoSansKR"), url(/font/NotoSansKR-Regular.otf);
+}
+body {
+  font-family: "NotoSansKR";
+  color:black;
+}

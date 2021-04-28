@@ -1,0 +1,212 @@
+@charset "UTF-8";
+html{
+	height:100%;
+}
+body{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+body>*{
+	width:100%;
+}
+.container{
+	margin-top: 30px;
+	min-width: 720px;
+	flex:1;
+}
+.container fieldset>table>tbody>tr>td,.container fieldset>table>tbody>tr>th{
+	height:50px;
+	text-align: center;
+	vertical-align: middle;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+#noticeView th,#noticeView td{
+	text-align: left;	
+}
+#pageNavi{
+	display:flex;
+	width:420px;
+	margin: 0 auto;
+	justify-content: center;
+}
+.writeBtn{
+	float: right;
+}
+[name=noticeContent].form-control{
+	height:450px;
+	resize: none;
+}
+.inputCommentBox ul{
+	list-style-type: none;
+	padding : 0;
+	display: flex;
+}
+.inputCommentBox textarea[name=commentContent]{
+	height:100%;
+	resize: none;
+}
+.inputCommentBox ul>li:first-child,.inputCommentBox ul>li:last-child {
+	width:15%;
+	text-align: center;
+	display: flex;	
+	justify-content: center;
+	align-items: center;
+}
+.inputCommentBox ul>li:nth-child(2) {
+	width:70%;
+}
+.comments,.recomments{
+	list-style-type: none;
+	padding : 0;
+	display: flex;
+	background-color: #f2f2f2;
+}
+.comments>li>p,.recomments>li>p{
+	margin: 0;
+}
+.comments>li:first-child{
+	display: flex;
+	flex-flow:column;
+	justify-content: flex-start;
+	align-items: center;
+	width:15%;
+	padding : 5px 0px 5px 0px;
+}
+
+.comments>li:last-child{
+	padding : 5px 0px 5px 0px;
+	width : 85%;
+	display:flex;
+	flex-flow:column;
+	justify-content: space-between;	
+	
+}
+.commentsBtn{	
+	text-align: right;	
+}
+.recoment{
+	display: none;	
+	justify-content: space-around;
+}
+.recoment>textarea{
+	width: 85%;
+	resize: none;
+}
+textarea.form-control{
+	height:100%;
+	resize:none;
+}
+.recoment>div{
+	width:10%;
+}
+.recomments>li:first-child{
+	display: flex;	
+	justify-content: center;
+	align-items: center;
+	width:15%;
+	padding : 5px 0px 5px 0px;
+}
+.recomments>li:nth-child(2){
+	display: flex;
+	flex-flow:column;	
+	justify-content: center;
+	align-items: center;
+	width:10%;
+	padding : 5px 0px 5px 0px;
+}
+.recomments>li:last-child{
+	padding : 5px 0px 5px 0px;
+	width : 75%;
+	display:flex;
+	flex-flow:column;
+	justify-content: space-between;	
+}
+.ajaxResult{
+	height : 120px;
+	border : 3px solid #d9534f;
+}
+#footer{
+	align-self:flex-end;
+	border-top : 1px solid #1a1a1a;
+	margin:1em 0
+}
+#footer li{
+	float:left;
+	margin-right:1.5em;
+	margin-bottom:1.5em;
+}
+#footer p{
+	clear:left;
+	margin-bottom:0;
+}
+.shopping{
+	display:flex;
+}
+.shopping>div{
+	width:50%;
+}
+.shopping>div:first-child{
+	text-align:center;
+}
+#goods{
+	width:80%;
+}
+.star{
+	display : flex;
+	align-items: center;
+}
+
+.star>div{
+	margin-left : 7px;
+	font-size: 16px;
+}
+.price{		
+	font-size: 20px;
+	color : #AE0000;
+	font-weight:bold;
+}
+.price>span:last-child{
+	font-size : 14px;
+}
+.count{
+	margin-top: 30px;
+}
+.count>button{
+	font-size:16px;
+	width:20px;
+	height:20px;
+	padding:0;
+	margin-top: -5px;
+}
+.count>span{
+	font-size:16px;
+	display:inline-block;		
+	text-align: center;
+}
+.count>span.amount{
+	height:20px;
+	width:20px;
+}
+.total{
+	margin-top:70px;
+	font-size:24px;
+	color : #FF0000;
+	font-weight:bold;
+}
+#payment{
+	margin-top:50px;
+	font-size:20px;
+}
+.short{
+	width:20%;
+	display:inline-block;
+	height : 48px;
+}
+#postApi>div{
+	margin-top:10px;
+}
+#auth{
+	display : none;
+}
