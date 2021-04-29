@@ -1,6 +1,7 @@
 package member.model.service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import common.JDBCTemplate;
 import member.model.dao.MemberDao;
@@ -12,6 +13,15 @@ public class MemberService {
 		//커넥션 생성
 		Connection conn = JDBCTemplate.getConnection();
 		Member m = new MemberDao().selectOneMember(conn,memberId,memberPw);
+		JDBCTemplate.close(conn);
+		
+		return m;
+	}
+
+	public Member selectOneMember(String memberId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		Member m = new MemberDao().selectOneMember(conn, memberId);
 		JDBCTemplate.close(conn);
 		
 		return m;

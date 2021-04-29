@@ -113,7 +113,7 @@
 	
 	<script>
 		function initInputs(){
-			$("[name=loginFrm] input").val("";)
+			$("[name=loginFrm] input").val("");
 		}
 	</script>
 	

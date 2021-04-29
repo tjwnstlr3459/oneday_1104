@@ -37,7 +37,7 @@ public class JoinServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
 		String memberName = request.getParameter("memberName");
-		String Phone = request.getParameter("Phone");
+		String Phone = request.getParameter("phone");
 		String Address = request.getParameter("address");
 		//3.로직처리
 		int result = new JoinService().JoinMember(memberId,memberPw,memberName,Phone,Address);
