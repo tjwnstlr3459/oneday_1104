@@ -17,11 +17,9 @@ import member.model.vo.Member;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
     public LoginServlet() {
         super();
     }
-
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.인코딩
@@ -45,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 				//정회원 또는 관리자인경우 -> 로그인 성공인경우 = 세션에 데이터 등록
 				HttpSession session = request.getSession();
 				session.setAttribute("m", m);
+
 				request.setAttribute("msg", "로그인  성공!");
 			}
 		}else {

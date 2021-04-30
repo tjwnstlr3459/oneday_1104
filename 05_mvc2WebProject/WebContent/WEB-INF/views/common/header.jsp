@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
     <%
     Member m = (Member)session.getAttribute("m");
-    
     %>
 	<!-- 폰트어썸(아이콘) -->
 	<link rel="stylesheet" href="/fontawesome/css/all.css">
@@ -38,10 +37,10 @@
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#">Menu1</a>
+					<a class="nav-link" href="/noticeList?reqPage=1">공지사항</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Menu2</a>
+					<a class="nav-link" href="/boardList?reqPage=1">자유게시판</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Menu3</a>
@@ -68,7 +67,7 @@
 			<button class="btn btn-secondary my-2 my-sm-0" data-toggle="modal" data-target=".modal">로그인</button>
 			<a class="btn btn-secondary my-2 my-sm-0" href="/joinFrm">회원가입</a>
 			<%}else{ %>
-			<a class="btn btn-secondary my-2 my-sm-0" href="#"><%=m.getMemberName() %></a>
+			<a class="btn btn-secondary my-2 my-sm-0" href="/mypage1"><%=m.getMemberName() %></a>
 			<a class="btn btn-secondary my-2 my-sm-0" href="/logout">로그아웃</a>
 			<%} %>
 		</div>

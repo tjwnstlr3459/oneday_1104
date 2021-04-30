@@ -13,10 +13,13 @@ public class JoinService {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new JoinDao().JoinMember(conn,memberId,memberPw,memberName,phone,address);
 
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		
-		JDBCTemplate.commit(conn);
 		JDBCTemplate.close(conn);
-	
 		return result;
 	}
 

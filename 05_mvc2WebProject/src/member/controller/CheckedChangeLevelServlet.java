@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.JoinService;
-import member.model.vo.Member;
+import member.model.service.MemberService;
 
 /**
- * Servlet implementation class JoinServlet
+ * Servlet implementation class CheckedChangeLevelServlet
  */
-@WebServlet(name = "Join", urlPatterns = { "/join" })
-public class JoinServlet extends HttpServlet {
+@WebServlet(name = "CheckedChangeLevel", urlPatterns = { "/checkedChangeLevel" })
+public class CheckedChangeLevelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinServlet() {
+    public CheckedChangeLevelServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,29 +33,25 @@ public class JoinServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		String memberId = request.getParameter("memberId");
-		String memberPw = request.getParameter("memberPw");
-		String memberName = request.getParameter("memberName");
-		String Phone = request.getParameter("Phone");
-		String Address = request.getParameter("address");
-		//3.로직처리
-		int result = new JoinService().JoinMember(memberId,memberPw,memberName,Phone,Address);
+		String num = request.getParameter("num");
+		String level = request.getParameter("level");
+		System.out.println("num : "+num);
+		System.out.println("level : "+level);
+		//3. 비지니스로직
+		//서비스에서 기능추가 //업데이트라서 리턴값은 int이지만 기능추가로 boolean으로 받음
+		boolean result = new MemberService().checkedChangeLevel(num,level);
+		System.out.println(result);
 		//4.결과처리
-		//결과 처리와 alter 페이지 지정
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		
-		if(result>0) {
-			//가입성공
-			request.setAttribute("msg", "가입성공");
+		if(result) {
+			request.setAttribute("msg", "변경성공");
 		}else {
-			//가입실패
-			request.setAttribute("msg", "가입실패");
+			request.setAttribute("msg", "변경 실패");
 		}
-		//결과 확인후 메인페이지 이동
-		request.setAttribute("loc", "/");
-		//페이지이동
+		request.setAttribute("loc", "/adminPage");
 		rd.forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import member.model.service.JoinService;
-import member.model.vo.Member;
+import member.model.service.MemberService;
 
 /**
- * Servlet implementation class JoinServlet
+ * Servlet implementation class DeleteMemberServlet
  */
-@WebServlet(name = "Join", urlPatterns = { "/join" })
-public class JoinServlet extends HttpServlet {
+@WebServlet(name = "DeleteMember", urlPatterns = { "/deleteMember" })
+public class DeleteMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinServlet() {
+    public DeleteMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,28 +34,23 @@ public class JoinServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		String memberId = request.getParameter("memberId");
-		String memberPw = request.getParameter("memberPw");
-		String memberName = request.getParameter("memberName");
-		String Phone = request.getParameter("Phone");
-		String Address = request.getParameter("address");
-		//3.로직처리
-		int result = new JoinService().JoinMember(memberId,memberPw,memberName,Phone,Address);
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		//3.비지니스로직
+		int result = new MemberService().deleteMember(memberNo);
 		//4.결과처리
-		//결과 처리와 alter 페이지 지정
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		
 		if(result>0) {
-			//가입성공
-			request.setAttribute("msg", "가입성공");
+			request.setAttribute("msg", "회원탈퇴 성공");
+			//회원 탈퇴시 사이트에서 로그아웃 시키기위한 코드
+			HttpSession session = request.getSession(false);
+			session.invalidate();
 		}else {
-			//가입실패
-			request.setAttribute("msg", "가입실패");
+			request.setAttribute("msg", "회원탈퇴 실패");
 		}
-		//결과 확인후 메인페이지 이동
 		request.setAttribute("loc", "/");
-		//페이지이동
 		rd.forward(request, response);
+		
 	}
 
 	/**

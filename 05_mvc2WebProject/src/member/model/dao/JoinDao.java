@@ -15,6 +15,8 @@ public class JoinDao {
 		PreparedStatement pstmt = null;
 		int result=0;
 		String query = "insert into member values(MEM_SEQ.NEXTVAL,?,?,?,?,?,3,to_char(SYSDATE, 'yyyy-mm-dd'))";
+	
+		
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
@@ -24,6 +26,9 @@ public class JoinDao {
 			pstmt.setString(5, address);
 			
 			result = pstmt.executeUpdate();
+			
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
