@@ -16,7 +16,7 @@ import notice.model.vo.Notice;
 /**
  * Servlet implementation class NoticeDeleteServlet
  */
-@WebServlet(name = "NoticeDelete", urlPatterns = { "/noticeDelete" })
+@WebServlet(name = "BoardDelete", urlPatterns = { "/boardDelete" })
 public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -75,7 +75,7 @@ public class NoticeDao {
 	public int insertNotice(Connection conn, Notice n) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query="insert into notice values(notice_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		String query="insert into Notice values(Notice_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
 		
 		try {
 			pstmt=conn.prepareStatement(query);
