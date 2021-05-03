@@ -9,47 +9,51 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.model.service.FreeService;
-import notice.model.vo.NoticePageData;
+import notice.model.service.NoticeService;
+import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class FreeListServlet
+ * Servlet implementation class BoardViewServlet
  */
-@WebServlet(name = "FreeList", urlPatterns = { "/freeList" })
-public class FreeListServlet extends HttpServlet {
+@WebServlet(name = "BoardView", urlPatterns = { "/boardView" })
+public class BoardViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FreeListServlet() {
+    
+    public BoardViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int reqPage = Integer.parseInt(request.getParameter("noticeNo"));
+		System.out.println(reqPage);
 		//3.로직처리
-		NoticePageData npd = new FreeService().selectPage(reqPage);
+		Notice n = new NoticeService().selectPage(reqPage);
 		//4.결과처리
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/freeList.jsp");
-		request.setAttribute("list", npd.getList());
-		request.setAttribute("pageNavi", npd.getPageNavi());
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/boardView.jsp");
+		request.setAttribute("n", n);
 		rd.forward(request, response);
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
 }
+
+
+
+
+
+
+
+
+

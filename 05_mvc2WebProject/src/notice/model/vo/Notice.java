@@ -54,6 +54,10 @@ public class Notice {
 	public String getNoticContent() {
 		return noticContent;
 	}
+	public String getNoticContentBr() {
+		return noticContent.replaceAll("\r\n", "<br>");
+	}
+	
 	public void setNoticContent(String noticContent) {
 		this.noticContent = noticContent;
 	}

@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
 	String pageNavi = (String)request.getAttribute("pageNavi");
@@ -26,7 +25,7 @@
 		<%for(Notice n : list){ %>
 		<tr class ="table-light">
 			<td><%=n.getRnum() %></td>
-			<td><%=n.getNoticeTitle() %></td>
+			<td><a href="/boardView?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a></td>
 			<td><%=n.getNoticeWriter() %></td>
 			<td><%=n.getNoticeDate() %></td>
 		</tr>
